@@ -1,0 +1,117 @@
+
+// Triggered animations via data attributes, eg. data-trigger='slide-in'
+// *********************************************************************
+
+
+.fade-in {
+  animation: fade $animation-duration linear backwards;
+}
+
+.slide-in {
+  animation: slide $animation-duration linear backwards;
+}
+
+[data-trigger='slide-in'], [data-trigger='fade-in'] {
+  opacity: 0;
+  &.slide-in, &.fade-in {
+    opacity: 1;
+  }
+}
+
+.slide-in, .fade-in {
+  animation-delay: $animation-delay;
+  &.no-delay {
+    animation-delay: 0;
+  }
+  &.delayed {
+    animation-delay: $animation-duration;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes shrink {
+  0% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-reveal {
+  0% {
+    opacity: 0;
+    transform: scaleX(0) translateY(40px);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1) translateY(0);
+  }
+}
+
+
+
+// Non-triggered animations
+// ************************
+
+.delayed-reveal {
+  visibility: visible;
+  position: relative;
+  // height: 20px;
+  width: 100%;
+  overflow: hidden;
+  transform-origin: left;
+  animation: reveal $animation-duration cubic-bezier(.8, 0, 1, 1) backwards;
+  &.slide-in {
+    animation: slide-reveal $animation-duration linear backwards;
+    animation-delay: $animation-delay;
+  }
+}
+
+.photo-reveal {
+  background-color: $white;
+  position: absolute;
+  right: 10px;  // accounting for padding
+  width: 115%;
+  min-width: 810px !important;  // it is overriden somewhere
+  transform-origin: right;
+  height: 100%;
+  min-width: 0;
+  z-index: 50;
+  visibility: visible;
+  &.triggered {
+    animation: shrink $animation-duration cubic-bezier(.8, 0, 1, 1) forwards;
+  }
+}

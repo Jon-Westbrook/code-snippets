@@ -1,0 +1,80 @@
+// Debug Mode Inline - Adds grey boxes to all layout html elements
+* {background: rgba(0, 0, 0, .1);}
+
+
+// Debug Mode Mixin - Adds grey boxes to all layout html elements
+@include debug;
+
+@mixin debug {
+  &, * {
+    background: $placeholder-background;
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr=#10000000, endColorstr=#10000000);
+  }
+}
+
+// The Ghost Vertical Align Method
+@include ghost-align;
+
+@mixin ghost-align {
+  &:before {
+    content: '\200B'; // crazy cool zero-width space
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    width: .1px;
+  }
+}
+
+
+// Target all link states simultaneously
+@mixin all-states {
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    @content;
+  }
+}
+
+
+// Clearfix
+@mixin clearfix {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+
+// =============================================================================
+// Font Face
+// =============================================================================
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+  $src: null;
+
+  $extmods: (
+    eot: '?',
+    svg: '#' + str-replace($name, ' ', '_')
+  );
+
+  $formats: (
+    otf: 'opentype',
+    ttf: 'truetype'
+  );
+
+  @each $ext in $exts {
+    $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+    $src: append($src, url(quote($path + '.' + $extmod)) format(quote($format)), comma);
+  }
+
+  @font-face {
+    font-family: quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    src: $src;
+  }
+}
+

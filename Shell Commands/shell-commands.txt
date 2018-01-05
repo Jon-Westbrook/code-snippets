@@ -1,3 +1,7 @@
 # Symbolic Link
 # ln -s original symlink
 ln -s ~/Sites/Repos/dotfiles/.sass-lint.yml .sass-lint.yml
+
+# Lock a folder
+# zip -er [destination path] [original]
+zip -er ~/Downloads/example.zip ~/example-folder
