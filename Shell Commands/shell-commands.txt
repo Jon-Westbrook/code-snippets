@@ -5,3 +5,6 @@ ln -s ~/Sites/Repos/dotfiles/.sass-lint.yml .sass-lint.yml
 # Lock a folder
 # zip -er [destination path] [original]
 zip -er ~/Downloads/example.zip ~/example-folder
+
+# Remove a tracked folder in git
+git rm -r --cached example-folder/
