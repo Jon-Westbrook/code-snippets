@@ -8,3 +8,7 @@ zip -er ~/Downloads/example.zip ~/example-folder
 
 # Remove a tracked folder in git
 git rm -r --cached example-folder/
+
+# Get out of botched merge
+git merge --abort
+
