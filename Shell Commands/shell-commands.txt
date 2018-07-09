@@ -15,3 +15,7 @@ git merge --abort
 # Visualize Git Repo Changes via Gource
 gource -1920x1080 --seconds-per-day 1 --key --hide 'filenames,dirnames'
 
+# Reset Git Repo to Server Version
+git fetch origin
+git reset --hard origin/master
+
