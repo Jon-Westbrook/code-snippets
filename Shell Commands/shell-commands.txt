@@ -1,6 +1,6 @@
 # Symbolic Link
 # ln -s original symlink
-ln -s ~/Sites/Repos/dotfiles/.sass-lint.yml .sass-lint.yml
+ln -s ~/Sites/Repos/dotfiles/.eslintrc .eslintrc
 
 # Lock a folder
 # zip -er [destination path] [original]
